@@ -21,4 +21,6 @@ from django.urls import path, include
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('announcements/', include('announcements.urls')),  # announcements app urls
+    path('accounts/', include('core.urls'))
+    # import all of our account urls.
 ]
