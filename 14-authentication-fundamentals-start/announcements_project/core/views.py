@@ -14,8 +14,8 @@ def register(request):
 
             # redirect the user on successful form submission to
             # the annoucements list
-            return redirect("announcements_list")
-            # where "announcements_list" is the name of the url
+            return redirect("announcement_list")
+            # where "announcement_list" is the name of the url
             # to redirect to.
 
     form = UserRegistrationForm()
