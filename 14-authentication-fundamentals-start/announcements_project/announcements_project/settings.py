@@ -130,6 +130,6 @@ AUTH_USER_MODEL = "core.User"
 # this is looking in the core module for the "User" in models.py
 
 # Login settings
-LOGIN_REDIRECT_URL = '/announcments'
+LOGIN_REDIRECT_URL = '/announcements'
 LOGOUT_REDIRECT_URL = '/accounts/login'
 LOGIN_URL = "/accounts/login/"
