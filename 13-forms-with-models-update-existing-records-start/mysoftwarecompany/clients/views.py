@@ -91,7 +91,6 @@ def update_company(request, company_id):
         }
     )
 
-
 def create_company(request):
     if request.method == "POST":
         form = CompanyForm(request.POST)
@@ -158,7 +157,7 @@ def contact_us(request):
 def list_companies(request):
     # fetching data from the database and passing it to the template
     companies = Company.objects.all()
-    return render(request, 'clients/companies_list.html', {'companies': companies})
+    return render(request, 'clients/companies_list_tailwind.html', {'companies': companies})
 
 def company_detail(request, company_id):
     # fetching a specific company by its ID or returning a 404 error if not found
