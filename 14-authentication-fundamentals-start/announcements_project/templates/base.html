@@ -1,22 +1,31 @@
 <!doctype html>
 <html>
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     {% block css_styles %}
     <!-- just adding a border -->
     <style>
-        input, select {
-        width: 100%;
-        border: 1px solid #d1d5db; /* Tailwind's gray-300 */
-        border-radius: 0.5rem;      /* rounded-lg */
-        padding: 0.5rem 0.75rem;    /* py-2 px-3 */
-        outline: none;
+        input,
+        select {
+            width: 100%;
+            border: 1px solid #d1d5db;
+            /* Tailwind's gray-300 */
+            border-radius: 0.5rem;
+            /* rounded-lg */
+            padding: 0.5rem 0.75rem;
+            /* py-2 px-3 */
+            outline: none;
         }
-        input:focus, select:focus {
-        border-color: #2563eb;      /* Tailwind's blue-600 */
-        box-shadow: 0 0 0 2px #93c5fd; /* light blue ring */
+
+        input:focus,
+        select:focus {
+            border-color: #2563eb;
+            /* Tailwind's blue-600 */
+            box-shadow: 0 0 0 2px #93c5fd;
+            /* light blue ring */
         }
     </style>
     {% endblock %}
@@ -24,10 +33,51 @@
     <title>
         {% block title %}Announcements App{% endblock %}
     </title>
-  </head>
-  <body>
+</head>
+
+<body>
     <header>
         {% block header %}
+        <nav class="bg-gray-800 p-4">
+            <div class="max-w-2xl mx-auto flex justify-between items-center">
+                <!-- Jinja URL used!-->
+                <a href="" class="text-white text-lg font-semibold">
+                    Announcements App
+                </a>
+                <!--  Check if the user is authenticated
+                    user is available in every template.
+                -->
+                {% if user.is_authenticated %}
+                <div>
+                    <!--  Add logout tag to action -->
+                    <form method="post" action="#">
+                        <span class="text-gray-300 mr-4">
+                            <!--  Add username and the role below -->
+                            Hello, USERNAME, ROLE
+                        </span>
+                        <!--  Add CSRF Token -->
+
+                        <button type="submit"
+                            class="px-4 py-2 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+                            Logout
+                        </button>
+                    </form>
+                </div>
+                <!--  Else if the user is not authenticated -->
+                {% else %}
+                <div>
+                    <!--  Add login template tag -->
+                    <a href="#"
+                        class="px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Login</a>
+                    <!--  Add register template tag -->
+                    <a href="#"
+                        class="px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Register</a>
+                </div>
+                <!--  Close the if statement. -->
+                {% endif %}
+
+            </div>
+        </nav>
         {% endblock %}
     </header>
     <main>
@@ -36,10 +86,11 @@
     </main>
     <footer>
         {% block footer %}
-            <p class="text-center text-gray-500">
-                &copy; Announcements App
-            </p>
+        <p class="text-center text-gray-500">
+            &copy; Announcements App
+        </p>
         {% endblock %}
     </footer>
-  </body>
+</body>
+
 </html>
