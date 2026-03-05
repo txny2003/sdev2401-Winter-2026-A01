@@ -17,8 +17,8 @@ def register(request):
             return redirect("announcement_list")
             # where "announcement_list" is the name of the url
             # to redirect to.
-
-    form = UserRegistrationForm()
+    else:
+        form = UserRegistrationForm()
     return render(
         request,
         'core/register.html',
