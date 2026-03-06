@@ -15,6 +15,9 @@ def announcement_list(request):
         {'announcements': announcements}
     )
 
-def create_announcement(request):
 
+@login_required
+def create_announcement(request):
+    # only teachers can create announcements
+    # students cannot.
     return render(request, 'announcements/create_announcement.html', {})

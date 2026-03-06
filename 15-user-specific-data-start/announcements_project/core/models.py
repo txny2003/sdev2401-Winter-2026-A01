@@ -9,6 +9,9 @@ class User(AbstractUser):
         ('teacher', 'Teacher'),
         ('student', 'Student'),
     )
+    # just a note on this the left side
+    # is the value and the right side
+    # is label of the value.
     role = models.CharField(max_length=10, choices=ROLE_CHOICES)
 
     # this is purely for convenience when we print out a user object
