@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 
 from .forms import UserRegistrationForm
-
+from django.contrib.auth.models import Group
 from django.contrib.auth.forms import AuthenticationForm
 
 def register(request):

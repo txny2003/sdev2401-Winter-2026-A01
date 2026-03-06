@@ -24,7 +24,7 @@ def announcement_list(request):
 # @user_passes_test(is_teacher)
 @login_required
 @permission_required('announcements.add_announcement', # permission
-                     raise_exception=True) # raise a 403 page.
+                     raise_exception=True) # raise a 403 page if they don't have permission.
 def create_announcement(request):
     # request.user is on every request.
     # only teachers can create announcements
