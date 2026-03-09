@@ -17,6 +17,8 @@ class Profile(models.Model):
         blank=True,
         null=True
     )
+    # this is going to store items in settings.MEDIA_ROOT
+    # and serve them from the url settings.MEDIA_URL
     # note it's good to keep things organized in your media.
 
 
