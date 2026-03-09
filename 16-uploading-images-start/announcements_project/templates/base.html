@@ -1,3 +1,6 @@
+<!-- all of your static files can now be added  -->
+{% load static %}
+
 <!doctype html>
 <html>
   <head>
@@ -36,7 +39,14 @@
         <nav class="bg-gray-800 p-4">
                 <div class="max-w-2xl mx-auto flex justify-between items-center">
                     <!-- Jinja URL used!-->
-                    <a href="" class="text-white text-lg font-semibold">
+                    <a href="" class="flex text-white text-lg font-semibold">
+                        <!-- Let's use our static here -->
+                        <img
+                            src="{% static '/logo-sm.png' %}"
+                            class="px-2"
+                            width="50"
+                            heigh="50"
+                        />
                         Announcements App
                     </a>
                     <!--  Check if the user is authenticated -->
