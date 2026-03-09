@@ -11,8 +11,13 @@ class Profile(models.Model):
         related_name='profile'
     )
     bio = models.TextField(blank=True, null=True)
-    # we're going add the file.
-
+    # we're going add the image file.
+    profile_picture = models.ImageField(
+        upload_to="profile_pictures/", # will upload to `media/profile_pictures/`
+        blank=True,
+        null=True
+    )
+    # note it's good to keep things organized in your media.
 
 
     def __str__(self):
