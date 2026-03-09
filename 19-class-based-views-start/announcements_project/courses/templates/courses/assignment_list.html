@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Assignments{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto px-4 md:px-0">
+  <div class="flex justify-between items-center mb-4">
+
+    <h1 class="text-3xl font-bold underline">
+      Assignments
+    </h1>
+  </div>
+  <ul>
+    {% for assignment in assignments %}
+    <li class="mb-4 p-4 border border-gray-200 rounded">
+      <h2 class="text-xl font-semibold">{{ assignment.title }}</h2>
+      <p>{{ assignment.description }}</p>
+      <p class="text-sm text-gray-600">Due: {{ assignment.due_date }}</p>
+      <a href="{% url 'assignment_submission' assignment.id %}" class="text-blue-600 hover:underline">Submit Assignment</a>
+    </li>
+    {% empty %}
+    <li>No assignments available.</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

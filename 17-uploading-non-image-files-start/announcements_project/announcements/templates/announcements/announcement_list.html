@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto px-4 md:px-0">
+    <div class="flex justify-between items-center mb-4">
+
+        <h1 class="text-3xl font-bold underline">
+            Announcements
+        </h1>
+        <a
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-2 py-2 px-4 rounded"
+            href="{% url 'create_announcement' %}">Create New Announcement</a>
+    </div>
+    <!-- Information about the company below -->
+    <section>
+        <ul>
+          {% for announcement in announcements %}
+            <li>
+              <h2 class="text-2xl font-semibold mt-4">
+                  <!-- subtitle here -->
+                  {{ announcement.title }}
+              </h2>
+              <p class="text-gray-700">
+                  <!-- description here -->
+                  {{ announcement.message }}
+              </p>
+              <p
+                  class="text-gray-500 text-sm"
+              ><em>Posted on {{ announcement.created_at }}</em></p>
+            </li>
+          {% empty %}
+            <li>No announcements available.</li>
+          {% endfor %}
+        </ul>
+
+    </section>
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Profile List{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto px-4 md:px-0">
+
+  <div class="flex justify-between items-center mb-4">
+        <h1 class="text-3xl font-bold underline">
+            Profile List
+        </h1>
+      </div>
+      <ul role="list" class="divide-y divide-gray-100 dark:divide-white/5">
+
+        {% for profile in profiles %}
+
+        <li class="flex gap-x-4 py-5">
+            <img
+              src="{{ profile.profile_picture.url }}"
+              alt="{{ profile.user.username }}'s profile picture"
+              height="48"
+              width="48"
+              />
+            <div class="min-w-0">
+              <p class="text-sm/6 font-semibold text-gray-900 dark:text-white">
+                {{ profile.user.username }}
+              </p>
+              <p class="mt-1 truncate text-xs/5 text-gray-500 dark:text-gray-400">
+                {{ profile.bio }}
+              </p>
+            </div>
+        </li>
+        {% empty %}
+        <li>No profiles available.</li>
+        {% endfor %}
+      </ul>
+    </div>
+</div>
+{% endblock %}

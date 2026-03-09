@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto px-4 md:px-0">
+  <h2>Register</h2>
+  <form method="post">
+    {% csrf_token %}
+
+    <!-- Loop through form fields -->
+    {% for field in form %}
+      <div>
+        <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-gray-700">
+          {{ field.label }}
+        </label>
+        {{ field }}
+        {% if field.errors %}
+          <p class="text-sm text-red-500 mt-1">{{ field.errors|striptags }}</p>
+        {% endif %}
+      </div>
+    {% endfor %}
+    <button type="submit" class="mt-2 w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg">
+      Sign Up
+    </button>
+  </form>
+  <!-- add a login link once we create it! -->
+</div>
+
+{% endblock %}

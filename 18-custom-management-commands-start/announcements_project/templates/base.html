@@ -1,0 +1,78 @@
+{% load static %}
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+    {% block css_styles %}{% endblock %}
+    {% block js_scripts %}{% endblock %}
+    <title>
+        {% block title %}Announcements App{% endblock %}
+    </title>
+  </head>
+  <body>
+    <header>
+        {% block header %}
+        <nav class="bg-gray-800 p-4">
+            <div class="max-w-2xl mx-auto flex justify-between items-center">
+                <!-- Title -->
+                <a href="" class="flex text-white text-lg font-semibold">
+                    <!-- Added image -->
+                    <img src="{% static '/logo-sm.png' %}"
+                        class="px-2"
+                        width="50"
+                        height="50"
+
+                    >
+                    Announcements App
+                </a>
+                <!--  Check if the user is authenticated -->
+                {% if user.is_authenticated %}
+                <div>
+                    <!--  Add logout tag to action -->
+                    <form method="post" action="{% url 'logout' %}">
+                        <span class="text-gray-300 mr-4">
+                            <!--  Add username and the role below -->
+                            Hello, {{user.username}}, ({{user.role}})
+                        </span>
+                        <!-- Add the assignment list url. -->
+                        <a href="{% url 'assignment_list' %}" class="px-4 py-2 mr-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
+                            Assignments
+                        </a>
+                        <!--  Add CSRF Token -->
+                        {% csrf_token %}
+                        <button type="submit" class="px-4 py-2 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+                            Logout
+                        </button>
+                    </form>
+                </div>
+                <!--  Else if the user is not authenticated -->
+                {% else %}
+                <div>
+                    <!--  Add login template tag -->
+                    <a href="{% url 'login' %}" class="px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Login</a>
+                    <!--  Add register template tag -->
+                    <a href="{% url 'login' %}" class="px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Register</a>
+                </div>
+                <!--  Close the if statement. -->
+                {% endif %}
+            </div>
+        </nav>
+        {% endblock %}
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+
+    </main>
+    <footer>
+        {% block footer %}
+            <p class="text-center text-gray-500">
+                &copy; Announcements App
+            </p>
+        {% endblock %}
+    </footer>
+  </body>
+</html>

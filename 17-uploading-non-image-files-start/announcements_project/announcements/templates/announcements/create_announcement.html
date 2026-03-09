@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto px-4 md:px-0">
+  <div class="flex justify-between items-center mb-4">
+
+    <h1 class="text-3xl font-bold underline">
+      Create an Announcement
+    </h1>
+  </div>
+  <form method="post">
+    {% csrf_token %}
+
+    <!-- Loop through form fields -->
+    {% for field in form %}
+      <div>
+        <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-gray-700">
+          {{ field.label }}
+        </label>
+        {{ field }}
+        {% if field.errors %}
+          <p class="text-sm text-red-500 mt-1">{{ field.errors|striptags }}</p>
+        {% endif %}
+      </div>
+    {% endfor %}
+    {% if form.non_field_errors %}
+    <div class="mt-4 mb-4 p-4 bg-red-100 text-red-800 border border-red-200 rounded">
+        <ul>
+            {% for error in form.non_field_errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    <button type="submit" class="mt-2 w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg">
+      Create Announcement
+    </button>
+  </form>
+
+
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+input, select {
+    width: 100%;
+    border: 1px solid #d1d5db; /* Tailwind's gray-300 */
+    border-radius: 0.5rem;      /* rounded-lg */
+    padding: 0.5rem 0.75rem;    /* py-2 px-3 */
+    outline: none;
+}
+input:focus, select:focus {
+    border-color: #2563eb;      /* Tailwind's blue-600 */
+    box-shadow: 0 0 0 2px #93c5fd; /* light blue ring */
+}
+textarea {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
+}
