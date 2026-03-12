@@ -22,7 +22,8 @@ class BulkAssignmentUploadForm(forms.Form):
             )
 
         # check that the content type is correct as well.
-        #
+        if file.content_type != "text/csv":
+            raise forms.ValidationError("File Type not a csv")
 
         # success
         return file
