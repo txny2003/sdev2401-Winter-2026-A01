@@ -7,6 +7,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("accounts/", include("core.urls")),  # registration view added!
     path("announcements/", include("announcements.urls")),  # announcements app urls
+    path("profiles/", include("profiles.urls")),
 ]
 
 # we need our project to serve the urls of media
