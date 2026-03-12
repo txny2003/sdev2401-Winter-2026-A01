@@ -13,26 +13,27 @@
       </div>
       <ul role="list" class="divide-y divide-gray-100 dark:divide-white/5">
 
+        {% for profile in profiles %}
         <li class="flex gap-x-4 py-5">
 
             <img
               src="URL HERE"
-              alt="USERNAME HERE's profile picture"
+              alt="{{ profile.user.username }}'s profile picture"
               height="48"
               width="48"
               />
             <div class="min-w-0">
               <p class="text-sm/6 font-semibold text-gray-900 dark:text-white">
-                USERNAME HERE
+                {{ profile.user.username }}
               </p>
               <p class="mt-1 truncate text-xs/5 text-gray-500 dark:text-gray-400">
-                BIOHERE
+                {{ profile.bio }}
               </p>
             </div>
         </li>
-        <!-- if empty -->
+        {% empty %}
         <li>No profiles available.</li>
-
+        {% endfor%}
       </ul>
     </div>
 </div>
