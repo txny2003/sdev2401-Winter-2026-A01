@@ -5,8 +5,8 @@ from django.urls import path, include
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('accounts/', include('core.urls')),  # registration view added!
-    path('announcements/', include('announcements.urls')),  # announcements app urls
+    path("accounts/", include("core.urls")),  # registration view added!
+    path("announcements/", include("announcements.urls")),  # announcements app urls
 ]
 
 # we need our project to serve the urls of media
@@ -14,5 +14,5 @@ urlpatterns = [
 if settings.DEBUG:
     urlpatterns += static(
         settings.MEDIA_URL,
-        document_root=settings.MEDIA_ROOT
+        document_root=settings.MEDIA_ROOT,
     )
