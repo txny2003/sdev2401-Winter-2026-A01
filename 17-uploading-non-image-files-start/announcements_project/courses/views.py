@@ -9,6 +9,9 @@ from .models import Assignment
 # using the form we've created.
 @login_required
 def bulk_assignment_upload(request):
+    success = False
+    assignments = []
+
     if request.method == "POST":
         form = BulkAssignmentUploadForm(
             request.POST,
@@ -16,20 +19,21 @@ def bulk_assignment_upload(request):
         )
         if form.is_valid():
             csv_file = form.cleaned_data.get("csv_file")
+            # below we're going to handle the parsing of
+            # the data.
             assignments = Assignment.create_assignments_from_file(
                 csv_file=csv_file,
                 owner=request.user,
             )
 
-            breakpoint()
-            # below we're going to handle the parsing of
-            # the data.
-
     else:
-
         form = BulkAssignmentUploadForm()
     return render(
         request,
         "courses/bulk_assignment_upload.html",
-        {"form": form},
+        {
+            "form": form,
+            "success": success,
+            "assignments": assignments,
+        },
     )
