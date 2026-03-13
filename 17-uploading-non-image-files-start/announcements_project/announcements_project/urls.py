@@ -22,9 +22,11 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('accounts/', include('core.urls')),  # registration view added!
-    path('announcements/', include('announcements.urls')),  # announcements app urls
-    path('profiles/', include('profiles.urls')),  # profiles app urls
+    path("accounts/", include("core.urls")),  # registration view added!
+    path("announcements/", include("announcements.urls")),  # announcements app urls
+    path("profiles/", include("profiles.urls")),  # profiles app urls
+    # what we just added.
+    path("courses/", include("courses.urls")),
 ]
 
 if settings.DEBUG:
