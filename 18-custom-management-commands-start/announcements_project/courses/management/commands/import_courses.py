@@ -3,7 +3,7 @@
 # and create course instances
 import csv
 
-import django.core.management.base import BaseCommand
+from django.core.management.base import BaseCommand
 
 
 class Command(BaseCommand):
@@ -13,3 +13,7 @@ class Command(BaseCommand):
 
     # we might be uploading various courses
     # add an argument for the path of the csv file.
+    def add_argument(self, parser):
+        parser.add_argument(
+            "csv_file",  #
+        )
