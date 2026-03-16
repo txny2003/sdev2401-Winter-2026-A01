@@ -23,19 +23,19 @@ def assignment_submission(request, assignment_id):
     success = False
     instance = None
     if request.method == "POST":
+        # handle the form
         form = SubmissionForm(
             request.POST,
             request.FILES,
         )
         if form.is_valid():
             # let's add the id.
+            # save file.
             instance = form.save(commit=False)
+            # save the assingment information based on the id
             instance.assignment = assignment
             instance.save()
             success = True
-    # handle the form
-    # post file file.
-    # save the information based on the ide
     # create the form.
     else:
         form = SubmissionForm()
