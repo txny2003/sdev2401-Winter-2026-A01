@@ -64,6 +64,12 @@ class Submission(models.Model):
 
     file = models.FileField(upload_to="submissions/")
     submitted_at = models.DateTimeField(auto_now_add=True)
+    # let's add a boolean field that will be true
+    # if hte instructor is notified and a default of false.
+    instructor_notified = models.BooleanField(
+        default=False,
+    )
+    # this will be changed by our management command.
 
     def __str__(self):
         return f"Submission by {self.student_name} for {self.assignment}"

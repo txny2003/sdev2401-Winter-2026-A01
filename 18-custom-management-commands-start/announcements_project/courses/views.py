@@ -19,7 +19,10 @@ def assignment_list(request):
 
 @login_required
 def assignment_submission(request, assignment_id):
-    assignment = get_object_or_404(Assignment, id=assignment_id)
+    assignment = get_object_or_404(
+        Assignment,
+        id=assignment_id,
+    )
     success = False
     instance = None
     if request.method == "POST":
