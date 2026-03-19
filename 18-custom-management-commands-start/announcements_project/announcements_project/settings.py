@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
     # custom apps
     "core",
     "announcements",
@@ -61,7 +60,7 @@ ROOT_URLCONF = "announcements_project.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": ['templates'],
+        "DIRS": ["templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -118,8 +117,6 @@ USE_I18N = True
 USE_TZ = True
 
 
-
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
@@ -127,23 +124,23 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # you can add this at the bottom of the file
 # as it's not created yet.
-AUTH_USER_MODEL = 'core.User'
+AUTH_USER_MODEL = "core.User"
 
 
-LOGIN_REDIRECT_URL = '/announcements/'  # after login original LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/accounts/login/'  # after logout
-LOGIN_URL = '/accounts/login/' #
+LOGIN_REDIRECT_URL = "/announcements/"  # after login original LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = "/accounts/login/"  # after logout
+LOGIN_URL = "/accounts/login/"  #
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 # Static files
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    BASE_DIR / 'static'
-]
+STATIC_URL = "/static/"
+STATICFILES_DIRS = [BASE_DIR / "static"]
 
 # Media files
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
 
+# email settings
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
