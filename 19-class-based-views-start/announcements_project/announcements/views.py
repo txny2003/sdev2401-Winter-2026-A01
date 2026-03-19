@@ -1,5 +1,6 @@
 from django.views import View
 from django.shortcuts import render, redirect
+from django.utils.decorators import method_decorator
 
 # import login_required decorator
 from django.contrib.auth.decorators import (
@@ -19,6 +20,10 @@ def is_teacher(user):
     return user.role == "teacher"
 
 
+# this is how to use function decorators on class based
+# views "dispatch" is the function that the view will
+# protect (which goes to get, post, etc.)
+@method_decorator(login_required, name="dispatch")
 class AnnouncementListView(View):
     template_name = "announcements/announcement_list.html"
 
