@@ -1,3 +1,4 @@
+from django.views import View
 from django.shortcuts import render, redirect
 
 # import login_required decorator
@@ -16,6 +17,18 @@ from .forms import AnnouncementForm
 def is_teacher(user):
     # the user object is passed in here by the decorator
     return user.role == "teacher"
+
+
+class AnnouncementListView(View):
+    template_name = "announcements/announcement_list.html"
+
+    def get(self, request):
+        announcements = Announcement.objects.all().order_by("-created_at")
+        return render(
+            request,
+            self.template_name,
+            {"announcements": announcements},
+        )
 
 
 # write this as a class based view and fix
