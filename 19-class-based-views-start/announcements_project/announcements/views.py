@@ -53,6 +53,11 @@ def announcement_list(request):
 # refer to the slides if you're confused.
 
 
+@method_decorator(login_required, name="dispatch")
+@method_decorator(
+    user_passes_test(is_teacher, login_url="login"),
+    name="dispatch",
+)
 class CreateAnnouncementView(View):
     template_name = "announcements/create_announcement.html"
     form_class = AnnouncementForm
