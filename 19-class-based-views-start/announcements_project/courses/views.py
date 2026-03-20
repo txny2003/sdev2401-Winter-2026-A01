@@ -38,6 +38,7 @@ def assignment_list(request):
     )
 
 
+@method_decorator(login_required, name="dispatch")
 class AssignmentSubmissionView(View):
     template_name = "courses/assignment_submission.html"
 

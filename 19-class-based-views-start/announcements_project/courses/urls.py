@@ -5,6 +5,7 @@ from .views import (
     assignment_list,
     assignment_submission,
     AssignmentListView,
+    AssignmentSubmissionView,
 )
 
 urlpatterns = [
@@ -19,9 +20,16 @@ urlpatterns = [
     ),
     # FBV
     # path("assignments/", assignment_list, name="assignment_list"),
+    # CBV
     path(
         "assignments/<int:assignment_id>/submit/",
-        assignment_submission,
+        AssignmentSubmissionView.as_view(),
         name="assignment_submission",
     ),
+    # FBV
+    # path(
+    #     "assignments/<int:assignment_id>/submit/",
+    #     assignment_submission,
+    #     name="assignment_submission",
+    # ),
 ]
