@@ -76,7 +76,7 @@ class BulkAssignmentUploadView(View):
 
         return render(
             request,
-            "courses/bulk_assignment_upload.html",
+            self.template_name,
             {
                 "form": form,
                 "success": False,
@@ -85,7 +85,29 @@ class BulkAssignmentUploadView(View):
         )
 
     def post(self, request):
-        pass
+        form = self.form_class(
+            request.POST,
+            request.FILES,
+        )
+        success = False
+        if form.is_valid():
+            # Process the uploaded CSV file
+            csv_file = form.cleaned_data["csv_file"]
+            # Create assignments from the CSV file
+            assignments = Assignment.create_assignments_from_csv(
+                csv_file, owner=request.user
+            )
+            # Note
+            success = True
+        return render(
+            request,
+            self.template_name,
+            {
+                "form": form,
+                "success": success,
+                "assignments": assignments,
+            },
+        )
 
 
 # Create your views here.
