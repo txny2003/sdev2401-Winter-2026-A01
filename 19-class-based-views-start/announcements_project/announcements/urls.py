@@ -1,6 +1,7 @@
 from django.urls import path
 from .views import (
     AnnouncementListView,
+    CreateAnnouncementView,
     announcement_list,
     create_announcement,
 )
@@ -18,5 +19,10 @@ urlpatterns = [
     #     announcement_list,
     #     name="announcement_list",
     # ),
-    path("create/", create_announcement, name="create_announcement"),
+    path(
+        "create/",
+        CreateAnnouncementView.as_view(),
+        name="create_announcement",
+    ),
+    # path("create/", create_announcement, name="create_announcement"),
 ]
