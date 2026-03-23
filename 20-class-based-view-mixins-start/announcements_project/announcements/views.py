@@ -65,7 +65,7 @@ class CreateAnnouncementView(
     # takes the same permission framework
     # APPNAME.action_MODELNAME
     # action is _add, _change, _delete, _view
-    permission_required = "announcements.add_announcement"
+    # note superusers pass the permission required.
     permission_required = "announcements.add_announcement"
 
     # in a form view all you need to specify
