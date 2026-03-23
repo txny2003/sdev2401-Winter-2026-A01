@@ -15,6 +15,7 @@ from .forms import AnnouncementForm
 
 # let's import our mixin
 from django.contrib.auth.mixins import LoginRequiredMixin
+from core.mixins import IsTeacherRoleMixin
 
 
 # our test function here.
@@ -31,13 +32,13 @@ class AnnouncementListView(LoginRequiredMixin, View):
         return render(request, self.template_name, {"announcements": announcements})
 
 
-# this will restrict access to only users that pass the is_teacher test
-# it will redirect to the login page if the user does not have permission.
-
-
-@method_decorator(login_required, name="dispatch")
-@method_decorator(user_passes_test(is_teacher, login_url="login"), name="dispatch")
-class CreateAnnouncementView(View):
+# below we're using multiple mixins
+# to achieve the same functionality as before.
+class CreateAnnouncementView(
+    LoginRequiredMixin,
+    IsTeacherRoleMixin,
+    View,
+):
     template_name = "announcements/create_announcement.html"
     form_class = AnnouncementForm
 
