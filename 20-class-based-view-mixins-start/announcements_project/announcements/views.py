@@ -17,7 +17,7 @@ from .forms import AnnouncementForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from core.mixins import IsTeacherRoleMixin
 
-from django.views.generic import ListView
+from django.views.generic import ListView, FormView
 
 
 # our test function here.
@@ -46,8 +46,24 @@ class AnnouncementListView(LoginRequiredMixin, ListView):
 #         announcements = Announcement.objects.all().order_by("-created_at")
 #         return render(request, self.template_name, {"announcements": announcements})
 
-# let's use a form view
 
+# let's use a form view
+class CreateAnnouncementView(
+    LoginRequiredMixin,
+    IsTeacherRoleMixin,
+    FormView,
+):
+    # in a form view all you need to specify
+    # is the form_valid function
+    def form_valid(self, form):
+        announcement = form.save(commit=False)
+        # use self.request
+        announcement.created_by = self.request.user
+        announcement.save()
+        return redirect("announcement_list")
+
+
+# the above this does the exact same as below
 
 # below we're using multiple mixins
 # to achieve the same functionality as before.
