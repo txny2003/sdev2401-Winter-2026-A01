@@ -10,7 +10,6 @@ class IsTeacherRoleMixin(UserPassesTestMixin):
     # from the docs we need to specify the "test_func"
     def test_func(self):
         # the request will be on self.
-        breakpoint()
         return self.request.user.role == "teacher"
 
 
