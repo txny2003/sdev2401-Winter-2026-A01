@@ -53,6 +53,11 @@ class CreateAnnouncementView(
     IsTeacherRoleMixin,
     FormView,
 ):
+    template_name = "announcements/create_announcement.html"
+    form_class = AnnouncementForm
+    # below redirect to success
+    success_url = "/announcements/"
+
     # in a form view all you need to specify
     # is the form_valid function
     def form_valid(self, form):
@@ -60,7 +65,7 @@ class CreateAnnouncementView(
         # use self.request
         announcement.created_by = self.request.user
         announcement.save()
-        return redirect("announcement_list")
+        return super().form_valid(form)
 
 
 # the above this does the exact same as below
