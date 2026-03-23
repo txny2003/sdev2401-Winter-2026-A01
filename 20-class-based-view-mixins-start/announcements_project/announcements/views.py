@@ -14,7 +14,7 @@ from .models import Announcement
 from .forms import AnnouncementForm
 
 # let's import our mixin
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from core.mixins import IsTeacherRoleMixin
 
 from django.views.generic import ListView, FormView
@@ -47,16 +47,26 @@ class AnnouncementListView(LoginRequiredMixin, ListView):
 #         return render(request, self.template_name, {"announcements": announcements})
 
 
+# instead of using IsTeacherRoleMixin
+# we can use Permission Required Mixin when
+# we add the user to a group (normally done
+# during registration)
 # let's use a form view
 class CreateAnnouncementView(
     LoginRequiredMixin,
-    IsTeacherRoleMixin,
+    PermissionRequiredMixin,
     FormView,
 ):
     template_name = "announcements/create_announcement.html"
     form_class = AnnouncementForm
     # below redirect to success
     success_url = "/announcements/"
+    # add the specific merission
+    # takes the same permission framework
+    # APPNAME.action_MODELNAME
+    # action is _add, _change, _delete, _view
+    permission_required = "announcements.add_announcement"
+    permission_required = "announcements.add_announcement"
 
     # in a form view all you need to specify
     # is the form_valid function
