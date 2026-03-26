@@ -19,3 +19,17 @@ class ExerciseSerializer(serializers.Serializer):
     exercise_type = serializers.ChoiceField(
         choices=Exercise.EXERCISE_TYPES,
     )
+
+    # on a serializer there's a save method.
+    # if you're creating a new instance
+    # it'll use the create method
+    # if you're modifying an instance
+    # it'll use the update method.
+
+    # let's override the create.
+    def create(self, validate_data):
+        # the validated_data is clean data
+        # is a dictionary.
+        return Exercise.objects.create(
+            **validate_data,
+        )

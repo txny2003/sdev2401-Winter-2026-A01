@@ -31,3 +31,26 @@ class ExerciseAPIView(APIView):
         )
         # return a response
         return Response(serializer.data)
+
+    # create a post request.
+    def post(self, request):
+        breakpoint()
+        # we want the deserialization step
+        serializer = ExerciseSerializer(request.data)
+
+        # just like forms we're going to check if the
+        # serializer is valid
+        if serializer.is_valid():
+            # we're going to save and get the instance
+            exercise = serializer.save()
+
+            # return a successful response
+            return Response(
+                ExerciseSerializer(exercise).data, status=201  # created status.
+            )
+        # handle the errors
+        # return a response with errors outside of the is valid
+        return Response(
+            serializer.errors,
+            status=400,  # bad request
+        )
