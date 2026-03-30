@@ -51,10 +51,22 @@ class ExerciseAPIView(APIView):
     # we're goign to make a single function that will handle both.
     def update(self, request, id, partial=False):
         # retrieve the object
+        exercise = get_object_or_404(Exercise, id=id)
         # create serializer (we're going to pass an instance.)
+        serializer = ExerciseSerializer(
+            exercise,  # instance
+            data=request.data,  # data from user
+            partial=partial,  # False for put, true for patch
+        )
         # validate it.
-        # save it (on the serializer.)
-        # give a response
+        if serializer.is_valid():
+            # save it (on the serializer.)
+            updated_exercise = serializer.save()  # returns a model instance
+            # serialize and show the data
+            # give a response if success
+            return Response(ExerciseSerializer(updated_exercise).data)
+        # give a response if error
+        return Response(serializer.errors, status=400)
 
     # put (full update)
     def put(self, request, id):
