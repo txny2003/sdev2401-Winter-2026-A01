@@ -3,12 +3,18 @@ from django.db import models
 
 # Create your models here.
 class Exercise(models.Model):
+    # we're looking at the
+    # tuples for the items.
+    # left is the value
+    # right is what is display as an option in the
+    # admin.
     EXERCISE_TYPES = [
         ("cardio", "Cardio"),
         ("strength", "Strength"),
         ("flexibility", "Flexibility"),
         ("balance", "Balance"),
     ]
+    # Note you can make these same.
 
     name = models.CharField(max_length=100)
     exercise_type = models.CharField(

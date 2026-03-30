@@ -34,7 +34,7 @@ class ExerciseAPIView(APIView):
 
     # create a post request.
     def post(self, request):
-        breakpoint()
+
         # we want the deserialization step
         serializer = ExerciseSerializer(data=request.data)
 
