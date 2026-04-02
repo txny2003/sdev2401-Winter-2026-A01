@@ -2,8 +2,12 @@ from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
+# import the permissions
+from rest_framework.permissions import IsAuthenticated
+
 # import viewsets from rest_framework
 from rest_framework import viewsets
+
 
 from .serializers import ExerciseSerializer, WorkoutSerializer
 from .models import Exercise, Workout
@@ -57,6 +61,9 @@ class ExerciseAPIView(APIView):
 # customize them are going to be
 # list, create, retrieve, update, partial_update, destroy
 class WorkoutViewSet(viewsets.ModelViewSet):
+    # permissions you can override
+    # allow all users to post our api
+    permission_classes = [IsAuthenticated]
     # we need to specify at least two things
     # queryset (what to get from the db.)
     queryset = Workout.objects.all()
