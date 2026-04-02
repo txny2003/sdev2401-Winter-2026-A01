@@ -8,7 +8,7 @@ from django.urls import path
 # Create a default router and add our viewset.
 router = DefaultRouter()
 # let's register all the endpoints for our viewset
-router.register(r"workouts", WorkoutViewSet)
+router.register("workouts", WorkoutViewSet)
 
 urlpatterns = [
     # the two paths for the apiviews.
