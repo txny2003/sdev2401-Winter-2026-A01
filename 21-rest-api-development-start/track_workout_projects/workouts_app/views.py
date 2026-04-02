@@ -46,6 +46,17 @@ class ExerciseAPIView(APIView):
         # return a response
         return Response(serializer.data)
 
+    # Build the delete endpoint.
+    # needs a specific id
+    def delete(self, request, id):
+        exercise = get_object_or_404(Exercise, id=id)
+
+        # delete
+        exercise.delete()
+        # note: you could make this a flag and then change your serializer
+        # to hide this flag and also filter this in the get queryset.
+        return Response(status=204)
+
     # two requests to handle:put and patch note they need the id of the item that
     # they want to change.
     # we're goign to make a single function that will handle both.
