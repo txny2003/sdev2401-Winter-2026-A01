@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # rest framework
     "rest_framework",
-
+    # the basic token app to our installed apps
+    "rest_framework.authtoken",
     # custom apps
     "workouts_app",
 ]
@@ -128,9 +129,13 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Django REST framework settings
 REST_FRAMEWORK = {
+    # when I use the api, I want to use an auth token.
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication",  # Use token-based authentication
+    ],
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly"
-    ]
+    ],
 }
