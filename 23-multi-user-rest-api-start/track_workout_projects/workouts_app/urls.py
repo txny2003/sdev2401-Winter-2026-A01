@@ -20,7 +20,7 @@ urlpatterns = [
         name="workout-log-api",
     ),
     path(
-        "workout-logs/<int:id>",
+        "workout-logs/<int:id>/",
         WorkoutLogAPIView.as_view(),
         name="workout-log-api",
     ),

@@ -77,7 +77,7 @@ class WorkoutLogAPIView(APIView):
     # we are overriding the queryset vlaue
     # with a get_querset method
     def get_queryset(self):
-        return WorkoutLog.object.all()
+        return WorkoutLog.objects.all()
 
     def get(self, request, id=None):
         # detail view
