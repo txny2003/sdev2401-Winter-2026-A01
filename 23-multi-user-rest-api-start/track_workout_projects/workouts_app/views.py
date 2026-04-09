@@ -61,7 +61,7 @@ class ExerciseAPIView(APIView):
         return Response(status=204)
 
 
-class WorkLogAPIVIew(APIView):
+class WorkoutLogAPIView(APIView):
     # authenticated users only
     permission_classes = [IsAuthenticated]
 
