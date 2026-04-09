@@ -21,6 +21,9 @@ class WorkoutViewSet(viewsets.ModelViewSet):
 
 
 class ExerciseAPIView(APIView):
+    def get_queryset(self):
+        return Exercise.objects.all()
+
     def get(self, request, id=None):
         # detail view
         if id:
@@ -28,7 +31,7 @@ class ExerciseAPIView(APIView):
             serializer = ExerciseSerializer(exercise)
             return Response(serializer.data)
         # list view
-        exercises = Exercise.objects.all()
+        exercises = self.get_queryset()
         serializer = ExerciseSerializer(exercises, many=True)
         return Response(serializer.data)
 
