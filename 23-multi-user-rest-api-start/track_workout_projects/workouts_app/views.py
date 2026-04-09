@@ -78,3 +78,15 @@ class WorkLogAPIVIew(APIView):
     # with a get_querset method
     def get_queryset(self):
         return WorkoutLog.object.all()
+
+    def get(self, request, id=None):
+        # list view
+        # let's get themfrom the db.
+        workout_logs = self.get_queryset()
+        # we're going to use our get_serializer
+        # self.get_serializer_class() returns
+        # WorkoutLogReadOnlySerializer
+        serializer = self.get_serializer_class()(
+            workout_logs, many=True  # queryset (many items from the db)
+        )
+        return Response(serializer.data)
