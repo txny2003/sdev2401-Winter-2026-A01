@@ -80,7 +80,9 @@ class WorkoutLogAPIView(APIView):
     # we are overriding the queryset vlaue
     # with a get_querset method
     def get_queryset(self):
-        return WorkoutLog.objects.all()
+        # i'm going to return only items for the given
+        # user.
+        return WorkoutLog.objects.filter(user=self.request.user)
 
     def get(self, request, id=None):
         # detail view
@@ -115,7 +117,11 @@ class WorkoutLogAPIView(APIView):
         )
         if serializer.is_valid():  # cleaning a validation
             # create a work out log instance
-            workout_log = serializer.save()
+            workout_log = serializer.save(
+                # from the token that is authenticating
+                # the user.
+                user=self.request.user
+            )
 
             # we're going to use this instance in a read only serializer
             # returns more detailed data than what you sent.
@@ -142,7 +148,11 @@ class WorkoutLogAPIView(APIView):
         )
         if serializer.is_valid():  # clean sanitization.
             # we need to save it to the db.
-            update_workout_log = serializer.save()
+            update_workout_log = serializer.save(
+                # from the token that is authenticating
+                # the user.
+                user=self.request.user
+            )
             # this is where the interesting jazz goes.
             return Response(
                 WorkoutLogReadOnlySerializer(update_workout_log).data,
