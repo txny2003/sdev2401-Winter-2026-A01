@@ -132,12 +132,31 @@ class WorkoutLogAPIView(APIView):
         )
 
     def update(self, request, id, partial=False):
-
-        # implement the update
-        # use the ingesting serializer
-
-        # respond with the updated workoutlog
-        # read only serializer.
+        # we need to get item from the db.
+        workout_log = get_object_or_404(WorkoutLog, id=id)
+        # we need to use the serializer on ingesting.
+        serializer = self.get_serializer_class()(
+            workout_log,  # pass the instance
+            data=request.data,  # what the user is trying to change
+            partial=True,  # handle each.
+        )
+        if serializer.is_valid():  # clean sanitization.
+            # we need to save it to the db.
+            update_workout_log = serializer.save()
+            # this is where the interesting jazz goes.
+            return Response(
+                WorkoutLogReadOnlySerializer(update_workout_log).data,
+                status=200,
+            )
+        return Response(
+            serializer.errors,
+            status=400,
+        )
 
     # create the patch
+    def patch(self, request, id):
+        return self.update(request, id, partial=True)
+
     # and put methods that use the update
+    def put(self, request, id):
+        return self.update(request, id, partial=False)

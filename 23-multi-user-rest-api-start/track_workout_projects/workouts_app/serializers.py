@@ -45,6 +45,7 @@ class WorkoutLogReadOnlySerializer(serializers.ModelSerializer):
     class Meta:
         model = WorkoutLog
         fields = [
+            "id",
             # foreign keys that we're going to override
             "workout",
             "exercise",
@@ -61,6 +62,7 @@ class WorkLogCreateUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = WorkoutLog
         fields = [
+            "id",
             # foreign keys that we're going to override
             "workout",  # this will only be the id
             "exercise",  # this will only be the id
@@ -74,3 +76,22 @@ class WorkLogCreateUpdateSerializer(serializers.ModelSerializer):
     # note: the save, create, update methods
     # are created automatically because it's part
     # of the ModelSerializer class.
+
+    # validation
+    # we're going to validate that cardio workouts
+    # can't have a wieght kg.
+    def validate(self, data):
+        exercise = data.get("exercise")
+        weight_kg = data.get("weight_kg")
+
+        breakpoint()
+
+        # I want to skip this validation if it's a partial
+        if exercise is None or weight_kg is None:
+            # successful validation
+            return data
+
+        # say if they exercise type is cardio we can't have a weight kg.
+
+        # default successful return
+        return data
