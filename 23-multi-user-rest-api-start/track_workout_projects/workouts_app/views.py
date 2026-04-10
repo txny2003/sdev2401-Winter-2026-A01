@@ -130,3 +130,14 @@ class WorkoutLogAPIView(APIView):
             serializer.errors,  # defined on the is_valid method
             status=400,  # bad request.
         )
+
+    def update(self, request, id, partial=False):
+
+        # implement the update
+        # use the ingesting serializer
+
+        # respond with the updated workoutlog
+        # read only serializer.
+
+    # create the patch
+    # and put methods that use the update
