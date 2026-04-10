@@ -101,3 +101,20 @@ class WorkLogCreateUpdateSerializer(serializers.ModelSerializer):
 
         # default successful return
         return data
+
+    # validate the weight_kg field
+    # we can't have negative weights
+    # we can't have weight 500kgs
+    def validate_weight_kg(self, value):
+        # do it
+        if value is not None and value < 0:
+            raise serializers.ValidationError(
+                "Weight can't be negative.",
+            )
+        if value is not None and value > 500:
+            raise serializers.ValidationError(
+                "Come on. Weight can't be greater than 500"
+            )
+
+        # default the success
+        return value
