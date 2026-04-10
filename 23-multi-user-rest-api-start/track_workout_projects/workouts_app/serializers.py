@@ -2,6 +2,11 @@ from rest_framework import serializers
 
 from .models import Exercise, Workout, WorkoutLog
 
+# beacuse settings.authusermodel... is a string
+# we're going to have import the User class
+# either our custom one or the one from django
+from django.contrib.auth.models import User
+
 
 class WorkoutSerializer(serializers.ModelSerializer):
     class Meta:
@@ -35,9 +40,20 @@ class ExerciseSerializer(serializers.Serializer):
         return instance
 
 
+class UserReadOnlySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = [
+            "id",
+            "username",
+            "email",
+        ]
+
+
 class WorkoutLogReadOnlySerializer(serializers.ModelSerializer):
     workout = WorkoutSerializer(read_only=True)
     exercise = ExerciseSerializer(read_only=True)
+    user = UserReadOnlySerializer(read_only=True)
 
     # I want you to create the meta
     # I want you to serialize the exercise and workout using
@@ -46,6 +62,7 @@ class WorkoutLogReadOnlySerializer(serializers.ModelSerializer):
         model = WorkoutLog
         fields = [
             "id",
+            "user",
             # foreign keys that we're going to override
             "workout",
             "exercise",
@@ -64,6 +81,7 @@ class WorkLogCreateUpdateSerializer(serializers.ModelSerializer):
         fields = [
             "id",
             # foreign keys that we're going to override
+            "user",
             "workout",  # this will only be the id
             "exercise",  # this will only be the id
             # plain old fields

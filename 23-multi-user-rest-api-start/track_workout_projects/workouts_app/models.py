@@ -1,5 +1,8 @@
 from django.db import models
 
+# use the settings.AUTH_USER_MODEL to import the user.
+from django.conf import settings
+
 
 # Create your models here.
 class Exercise(models.Model):
@@ -28,6 +31,14 @@ class Workout(models.Model):
 
 class WorkoutLog(models.Model):
     """Tracking specific performance for an exercise in a workout"""
+
+    # add the user
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+    )
 
     # foreign key items
     workout = models.ForeignKey(Workout, on_delete=models.CASCADE, related_name="logs")
