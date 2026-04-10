@@ -81,10 +81,12 @@ class WorkLogCreateUpdateSerializer(serializers.ModelSerializer):
     # we're going to validate that cardio workouts
     # can't have a wieght kg.
     def validate(self, data):
-        exercise = data.get("exercise")
+        exercise = data.get("exercise")  # this will be a db instance
+        # deal with if it's a patch/post
+        # there shoudl be an instance.
+        if exercise is None and self.instance is not None:
+            exercise = self.instance.exercise
         weight_kg = data.get("weight_kg")
-
-        breakpoint()
 
         # I want to skip this validation if it's a partial
         if exercise is None or weight_kg is None:
@@ -92,6 +94,10 @@ class WorkLogCreateUpdateSerializer(serializers.ModelSerializer):
             return data
 
         # say if they exercise type is cardio we can't have a weight kg.
+        if exercise.exercise_type == "cardio" and weight_kg is not None:
+            raise serializers.ValidationError(
+                "Cardio workouts can't have weights",
+            )
 
         # default successful return
         return data
