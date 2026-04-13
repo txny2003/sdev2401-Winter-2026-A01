@@ -15,6 +15,7 @@ class IsOwnerOfResourceOrReadOnly(BasePermission):
     """
 
     # this returns a boolean whether they have permission or not.
+    # in an apiview check_object_permission needs to be called for this to be run.
     def has_object_permission(self, request, view, obj):
         breakpoint()
         # Read permissions on any request.
@@ -27,3 +28,7 @@ class IsOwnerOfResourceOrReadOnly(BasePermission):
         # Note 1: object is used from detail that will be passed in (ensure "user" is on the model)
         # Note 2: remember that the request.user will be the user based on the token that was
         # passed in the header
+
+    # we're not defining this but below is run on every request.
+    # def has_permission(self, request, view):
+    #     return super().has_permission(request, view)

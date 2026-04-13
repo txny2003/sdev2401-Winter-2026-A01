@@ -142,6 +142,8 @@ class WorkoutLogAPIView(APIView):
     def update(self, request, id, partial=False):
         # we need to get item from the db.
         workout_log = get_object_or_404(WorkoutLog, id=id)
+        # we need to explicitly call the object permission in an api view.
+        self.check_object_permissions(request, workout_log)
         # we need to use the serializer on ingesting.
         serializer = self.get_serializer_class()(
             workout_log,  # pass the instance
