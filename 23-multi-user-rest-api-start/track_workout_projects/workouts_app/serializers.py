@@ -91,6 +91,13 @@ class WorkLogCreateUpdateSerializer(serializers.ModelSerializer):
             "time",
         ]
 
+    # note: the save, create, update methods
+    # are created automatically because it's part
+    # of the ModelSerializer class.
+
+    # validation
+    # we're going to validate that cardio workouts
+    # can't have a wieght kg.
     def validate(self, data):
         exercise = data.get("exercise")  # this will be a db instance
         # deal with if it's a patch/post
