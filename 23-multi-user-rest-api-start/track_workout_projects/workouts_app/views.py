@@ -4,6 +4,7 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 
+from .permissions import IsOwnerOfResourceOrReadOnly
 
 from .serializers import (
     ExerciseSerializer,
@@ -66,7 +67,8 @@ class ExerciseAPIView(APIView):
 
 class WorkoutLogAPIView(APIView):
     # authenticated users only
-    permission_classes = [IsAuthenticated]
+    # only owners of the workout log will be able to update their own items.
+    permission_classes = [IsAuthenticated | IsOwnerOfResourceOrReadOnly]
 
     # we can override the default value of a
     # serializer class with a method named
