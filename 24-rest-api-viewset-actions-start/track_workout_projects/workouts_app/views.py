@@ -7,6 +7,9 @@ from rest_framework.permissions import IsAuthenticated
 # let's import this action which will allow us to extend the viewset.
 from rest_framework.decorators import action
 
+# we're going to import the search filter
+from rest_framework import filters
+
 from .permissions import IsOwnerOfResourceOrReadOnly
 from .serializers import (
     ExerciseSerializer,
@@ -23,6 +26,15 @@ class WorkoutViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     queryset = Workout.objects.all()
     serializer_class = WorkoutSerializer
+    # search filter
+    filter_backends = [filters.SearchFilter]
+    # this above is going to make it so that I can add
+    # the search query parameters
+    search_fields = ["title"]
+    # this is going to search on the title field
+    # again this is basic for more information take a
+    # look at opensearch, elasticsearch, apache solr
+    # it's a big thing.
 
     # we're going to create an action.
     # where we get the workoutlogs and the workouts
